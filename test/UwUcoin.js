@@ -53,15 +53,5 @@ contract('UwUcoin', function(accounts) {
       assert.equal(balance.toNumber(), 5175000, 'rm transfer.amount from sender.account');
     });
   });
-  
-      assert.equal(receipt.logs[0].args._to, accounts[1], 'logs.tansfer.amount');
-      return tokenInstance.balanceOf(accounts[1])
-    }).then(function(balance) {
-      assert.equal(receipt.logs[0]._value, 1725000, 'receive.amount.recieved')
-      return tokenInstance.balanceOf(accounts[0]);
-    }).then(function(balance) {
-      assert.equal(balance.toNumber(), )
-    })
 
-  })
 })
