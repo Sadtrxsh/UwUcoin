@@ -50,8 +50,25 @@ contract('UwUcoin', function(accounts) {
       assert.equal(receipt.logs[0]._value, 1725000, 'receive.amount.recieved');
       return tokenInstance.balanceOf(accounts[0]);
     }).then(function(balance) {
-      assert.equal(balance.toNumber(), 5175000, 'rm transfer.amount from sender.account');
+      assert.equal(balance.toNumber(), 5175000, 'rm * transfer.amount from sender.account');
     });
   });
+  it('handler delegated transferTokens', function() {
+    return UwUcoin.deployed().then(function(instance) {
+      tokenInstance = instance;
+      fromAccount = accounts[2];
+      toAccount = accounts[3];
+      spendingAccount = accounts[4];
 
-})
+      //transferToken _to fromAccount
+      return tokenInstance.transfer(fromAccount, 100, { from: accounts[0] });
+    }).then(function(receipt) {
+      //approved.spendingAccount spend(10).transferTokens.fromAccount
+      return tokenInstance.approve(spendingAccount, 10, { from: fromAccount });
+    }).then(function(receipt) {
+      return tokenInstance.transferFrom(fromAccount, toAccount, 9999, { from: spendingAccount });
+    }).then(assert.fail).catch(function(error) {
+
+    })
+  });
+});
