@@ -70,10 +70,15 @@ contract('UwUcoin', function(accounts) {
     }).then(assert.fail).catch(function(error) {
       assert(error.message.indexOf('revert') >= 0, '!transfer.amount is > balance');
       //try transfer > approved.amount
-      return tokenInstance.transferFrom(fromAccount, toAccount, 69, {from: spendingAccount});
+      return tokenInstance.transferFrom(fromAccount, toAccount, 20, {from: spendingAccount});
     }).then(assert.fail).catch(function(error) {
       assert(error.message.indexOf('revert') >= 0, '!transfer.amount > approved.amount');
-      
+      return tokenInstance.transferFrom.call(fromAccount, toAccount, 10, { from: spendingAccount });
+    }).then(function(success) {
+      assert.equal(success, true);
+      return tokenInstance.transferFrom.call(fromAccount, toAccount, 69 {from: spendingAccount});
+    }).then(function(receipt) {
+
     })
   });
 });
