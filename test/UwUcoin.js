@@ -1,4 +1,4 @@
- var UwUcoin = artifacts.require("./UwUcoin.sol");
+var UwUcoin = artifacts.require("./UwUcoin.sol");
 
 contract('UwUcoin', function(accounts) {
   var tokenInstance
@@ -78,7 +78,8 @@ contract('UwUcoin', function(accounts) {
       assert.equal(success, true);
       return tokenInstance.transferFrom.call(fromAccount, toAccount, 69 {from: spendingAccount});
     }).then(function(receipt) {
-
+      assert.equal(reciept.logs.length, 1, 'trigger.event[1]');
+      
     })
   });
 });
