@@ -79,7 +79,7 @@ contract('UwUcoin', function(accounts) {
       return tokenInstance.transferFrom.call(fromAccount, toAccount, 69 {from: spendingAccount});
     }).then(function(receipt) {
       assert.equal(reciept.logs.length, 1, 'trigger.event[1]');
-      
+      assert.equal(receipt.logs[0].event)
     })
   });
 });
